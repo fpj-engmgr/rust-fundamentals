@@ -3,8 +3,10 @@ fn own_vec(mut vector: Vec<i32>) {
     println!("{:?}", vector);
 }
 
-fn own_integer(x: i32) {
-    x + 1;
+fn own_integer(x: &mut i32) -> i32{
+    let x = *x + 1;
+    println!("{}", x);
+    x
 }
 
 fn own_string(s: String) {
@@ -16,12 +18,12 @@ fn own_string(s: String) {
 // When you borrow a variable, you're essentially saying 
 // "I want to use this variable for a little while, but I promise I won't modify it."
 fn main() {
-    let mut my_vec = vec![1, 2, 3, 4, 5];
-    let my_int = 10;
+    let my_vec = vec![1, 2, 3, 4, 5];
+    let mut my_int = 10;
     let my_string = String::from("Hello, world!");
 
     // this compiles no problem!
-    own_integer(my_int);
+    own_integer(&my_int);
     println!("{}", my_int);
 
     own_string(my_string); // take ownership of my_string
